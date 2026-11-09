@@ -5,6 +5,7 @@ import com.svi.warcardgame.game.GameSetup;
 import com.svi.warcardgame.game.WarCardGame;
 import com.svi.warcardgame.models.Deck;
 import com.svi.warcardgame.models.Player;
+import java.util.NoSuchElementException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,10 @@ public class Main {
             GameSetup gameSetup = new GameSetup(scanner);
             gameSetup.start();
 
+        } catch (NoSuchElementException e) {
+            System.out.println("\nInput closed. Exiting War Card Game.....");
+        }finally{
             scanner.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 
