@@ -6,9 +6,9 @@ import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Deque;
 
-/*
-* Handles the playerNo and the cards of players using Deque
-* */
+/**
+ * Handles the playerNo and the cards of players using Deque
+ * */
 
 public class Player {
     private final int playerNo;
@@ -23,32 +23,32 @@ public class Player {
         return playerNo;
     }
 
-    public boolean hasCards(){
+    public boolean hasCards() {
         return !cards.isEmpty();
     }
 
-    public boolean hasAllCards(int totalCards){
+    public boolean hasAllCards(int totalCards) {
         return cards.size() == totalCards;
     }
 
-    public void addToBottom(Card card){
-        if (card != null){
+    public void addToBottom(Card card) {
+        if (card != null) {
             cards.addLast(card);
         }
     }
 
-    public Card playTopCard(){
-        if(!cards.isEmpty()){
+    public Card playTopCard() {
+        if (!cards.isEmpty()) {
             return cards.removeFirst();
         }
         return null;
     }
 
-    public void collectCards(List<Card> playedCards, Card winningCard){
+    public void collectCards(List<Card> playedCards, Card winningCard) {
         addToBottom(winningCard);
 
-        for(Card card : playedCards){
-            if (card != winningCard){
+        for (Card card : playedCards) {
+            if (card != winningCard) {
                 addToBottom(card);
             }
         }

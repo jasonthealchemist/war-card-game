@@ -4,33 +4,34 @@ import com.svi.warcardgame.enums.Ranks;
 import com.svi.warcardgame.enums.Suits;
 
 
-/*
-* Handles the comparison method and display of the cards.
-*
-* */
-public class Card{
+/** Handles the comparison method and display of the cards.
+ *
+ * */
+public class Card {
     private final Ranks rank;
     private final Suits suit;
     private static final String SYMBOL_SEPARATOR = "-";
     private static final String DISPLAY_SEPARATOR = " ";
-
 
     public Card(Ranks rank, Suits suit) {
         this.rank = rank;
         this.suit = suit;
     }
 
+    public Ranks getRank() {
+        return rank;
+    }
 
-    public Ranks getRank() {return rank;}
-    public Suits getSuit() {return suit;}
+    public Suits getSuit() {
+        return suit;
+    }
 
-    public static int compareCard(Card a, Card b){
+    public static int compareCard(Card a, Card b) {
 
         int rankComparison = Integer.compare(a.getRank().getValue(),
                 b.getRank().getValue());
 
-
-        if (rankComparison != 0){
+        if (rankComparison != 0) {
             return rankComparison;
         }
 
@@ -46,7 +47,7 @@ public class Card{
                 + DISPLAY_SEPARATOR;
     }
 
-    public String toDisplayString(){
+    public String toDisplayString() {
         return suit.getDisplaySymbol() + suit.getSymbol() + "-" + rank.getSymbol();
     }
 }

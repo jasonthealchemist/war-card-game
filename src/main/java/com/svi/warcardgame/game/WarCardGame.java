@@ -12,14 +12,13 @@ import java.util.List;
 
 import static com.svi.warcardgame.utils.ConsoleColors.RESET;
 
-/*
-*  Handles the game rounds, findWinningIndex, round results, displayCollected Cards and remove eliminated players.
-*/
+/**
+ * Handles the game rounds, findWinningIndex, round results, displayCollected Cards and remove eliminated players.
+ **/
 public class WarCardGame {
 
     public Player playGame(List<Player> players, int totalCards) {
         List<Player> activePlayers = new ArrayList<>();
-
 
         for (Player player : players) {
             if (player.hasCards()) {
@@ -58,19 +57,11 @@ public class WarCardGame {
 
             roundWinner.displayDeck();
 
-            System.out.println("\nActive players remaining: "
-                    + activePlayers.size());
+            System.out.println("\nActive players remaining: " + activePlayers.size());
 
             if (roundWinner.hasAllCards(totalCards)) {
                 System.out.println("\n========== GAME OVER ==========");
-                System.out.println("Player "
-                        + roundWinner.getPlayerNo()
-                        + " wins the game!");
-
-                return roundWinner;
             }
-
-
             roundNumber++;
         }
 
@@ -78,7 +69,6 @@ public class WarCardGame {
         if (activePlayers.size() == 1) {
             return activePlayers.get(0);
         }
-
         return null;
     }
 
@@ -95,11 +85,11 @@ public class WarCardGame {
         }
     }
 
-    private int findWinningIndex(List<Card> tableCards){
+    private int findWinningIndex(List<Card> tableCards) {
         int winningIndex = 0;
 
-        for(int index = 1; index < tableCards.size(); index++){
-            if((Card.compareCard(tableCards.get(index), tableCards.get(winningIndex))) > 0){
+        for (int index = 1; index < tableCards.size(); index++) {
+            if ((Card.compareCard(tableCards.get(index), tableCards.get(winningIndex))) > 0) {
                 winningIndex = index;
             }
         }
@@ -118,20 +108,9 @@ public class WarCardGame {
             Player player = playersInRound.get(index);
             Card playedCard = tableCards.get(index);
 
-            if (playedCard == winningCard) {
-                System.out.println(ConsoleColors.GOLD + "★ WINNER: Player "
-                        + player.getPlayerNo()
-                        + ": " + playedCard.toDisplayString()
-                        + " ★" + ConsoleColors.RESET);
-            } else {
-                System.out.println("Player "
-                        + player.getPlayerNo()
-                        + ": " + playedCard.toDisplayString());
-            }
+            System.out.println("Player " + player.getPlayerNo() + ": " + playedCard.toDisplayString());
         }
-
-        System.out.println("\nRound winner: Player "
-                + roundWinner.getPlayerNo());
+        System.out.println(ConsoleColors.GREEN + "\n★ Round winner: Player " + roundWinner.getPlayerNo() + " " +  winningCard + "★" + ConsoleColors.RESET);
     }
 
     private void displayCollectedCards(List<Card> tableCards, Card winningCard) {
@@ -154,10 +133,7 @@ public class WarCardGame {
             Player player = activePlayers.get(index);
 
             if (!player.hasCards()) {
-                System.out.println("Player "
-                        + player.getPlayerNo()
-                        + " has no cards left and is eliminated.");
-
+                System.out.println("Player " + player.getPlayerNo() + " has no cards left and is eliminated.");
                 activePlayers.remove(index);
             }
         }

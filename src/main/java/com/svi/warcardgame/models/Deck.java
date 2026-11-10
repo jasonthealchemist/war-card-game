@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- * The Deck class is responsible for loading, validating the deck from file, shuffling, input shuffling times and round robin distribution to the players.
+ * The Deck class is responsible for loading, validating the deck from file, shuffling, input shuffling times and round-robin distribution to the players.
  */
 
 public class Deck {
@@ -26,22 +26,19 @@ public class Deck {
         List<Card> loadedCards = new ArrayList<>();
         Set<String> uniqueCards = new HashSet<>();
 
-        /*
-        * Read the file using BufferedReader to read the file deck line by line,
-        * */
+        // Read the file using BufferedReader to read the file deck line by line.
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
                 Objects.requireNonNull(Deck.class.getResourceAsStream("/input.txt"))
         ))) {
 
             String line;
 
-
             // Validation check if the file deck is valid or invalid.
             while ((line = reader.readLine()) != null) {
                 StringTokenizer tokenizer =
                         new StringTokenizer(line, " \t,");
 
-                // check if another card exists and retrives the next card
+                // check if another card exists and retrieves the next card.
                 while (tokenizer.hasMoreTokens()) {
                     String cardCode = tokenizer.nextToken();
                     String[] parts = cardCode.split("-", -1);
@@ -55,11 +52,11 @@ public class Deck {
                     Suits suit;
                     Ranks rank;
 
-                    try{
+                    try {
                         suit = Suits.fromSymbol(parts[0]);
                         rank = Ranks.fromSymbol(parts[1]);
 
-                    }catch (IllegalArgumentException e) {
+                    } catch (IllegalArgumentException e) {
                         System.out.println("Error: Invalid card: " + cardCode);
                         return false;
                     }
@@ -80,7 +77,6 @@ public class Deck {
                 return false;
             }
 
-
             cards.clear();
             cards.addAll(loadedCards);
 
@@ -93,14 +89,12 @@ public class Deck {
         }
     }
 
-    // create new card ArrayList
     public Deck() {
         cards = new ArrayList<>();
     }
 
-
-    // Perfect shuffle, cuts the deck in half and distribute the card in roundrobin
     public void shuffle() {
+        // Perfect shuffle: cut the deck in half, then alternate one card from each half
         int middle = cards.size() / 2;
 
         List<Card> firstHalf = new ArrayList<>(
@@ -117,16 +111,15 @@ public class Deck {
             shuffledCards.add(firstHalf.get(i));
             shuffledCards.add(secondHalf.get(i));
         }
-
+        // Replace the old order with the shuffled order.
         cards.clear();
         cards.addAll(shuffledCards);
     }
 
     // Handles the shufflingTimes
     public void shuffleMultipleTimes(int shuffleCount) {
-
         if (shuffleCount < MIN_SHUFFLES || shuffleCount > MAX_SHUFFLES) {
-            System.out.println("Error: Shuffle count must be between " + MIN_SHUFFLES + " and " +  MAX_SHUFFLES + ".");
+            System.out.println("Error: Shuffle count must be between " + MIN_SHUFFLES + " and " + MAX_SHUFFLES + ".");
             return;
         }
         for (int count = 0; count < shuffleCount; count++) {
@@ -134,10 +127,9 @@ public class Deck {
         }
     }
 
-
     public void distributeCards(List<Player> players) {
         if (players.isEmpty()) {
-            System.out.println("There are no players to receive cards");
+            System.out.println("There are no players to receive cards.");
             return;
         }
         int playerIndex = 0;
@@ -153,9 +145,9 @@ public class Deck {
         }
         cards.clear();
     }
+
     public void displayDeck(String title) {
         System.out.println("\n" + title);
         CardPrinter.printCards(cards);
     }
 }
-

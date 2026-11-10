@@ -12,17 +12,15 @@ import java.util.Scanner;
 
 import static com.svi.warcardgame.models.Deck.MIN_SHUFFLES;
 
-/*
-* GameSetup class is responsible for the game settings and setup, handles the number of players, create players, get the number of shuffles.
-*
- */
+/**
+ * GameSetup class is responsible for the game settings and setup, handles the number of players, create players, get the number of shuffles.
+ **/
 
 public class GameSetup {
     private static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 8;
 
     private final Scanner scanner;
-
 
     public GameSetup(Scanner scanner) {
         this.scanner = scanner;
@@ -44,7 +42,7 @@ public class GameSetup {
                     return false;
                 }
             }else {
-                System.out.println("Invalid, Please press Enter");
+                System.out.println("Invalid, Please press Enter.");
             }
         }
     }
@@ -62,7 +60,7 @@ public class GameSetup {
                 return false;
             }
 
-            System.out.println("Invalid, Please enter Y or N");
+            System.out.println("Invalid, Please enter Y or N.");
 
         }
     }
@@ -86,7 +84,6 @@ public class GameSetup {
                 return;
             }
 
-
         }
     }
 
@@ -96,7 +93,7 @@ public class GameSetup {
         System.out.println("Loading deck from file...");
 
         if (!deck.loadFromFile("input.txt")){
-            System.out.println("Check the file and try again");
+            System.out.println("Check the file and try again.");
             return false;
         }
 
@@ -142,9 +139,7 @@ public class GameSetup {
                         "Number of players must be between " + MIN_PLAYERS  + " and " + MAX_PLAYERS + " to start playing."
                 );
             }catch (NumberFormatException e){
-                System.out.println(
-                        "Please enter a whole number"
-                );
+                System.out.println("Please enter a whole number.");
             }
         }
     }
@@ -189,9 +184,7 @@ public class GameSetup {
             if (answer.equalsIgnoreCase("N") || answer.equalsIgnoreCase("NO")){
                 return false;
             }
-            System.out.println(
-                    "Error: Please enter Y/YES or N/NO."
-            );
+            System.out.println("Error: Please enter Y/YES or N/NO.");
         }
     }
 }

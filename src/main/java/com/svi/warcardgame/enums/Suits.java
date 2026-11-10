@@ -1,6 +1,8 @@
 package com.svi.warcardgame.enums;
 
-// Handles enum suits
+/***
+ Handles the rank enums.
+ * */
 public enum Suits {
     DIAMOND('D', 4),
     HEART('H', 3),
@@ -27,7 +29,7 @@ public enum Suits {
 
     public static Suits fromSymbol(String text) {
         if(text == null || text.length() != SYMBOL_LENGTH){
-            throw new IllegalArgumentException("Suit symbol cannot be null");
+            throw new IllegalArgumentException("Suit symbol cannot be null.");
         }
         for (Suits suit : values()) {
             if (suit.symbol == text.charAt(0)){
